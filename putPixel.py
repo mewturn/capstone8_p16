@@ -24,8 +24,12 @@ def process_image(photo, height, width, pixels):
     print("Image height:", height, "Image width:", width, "Total pixels:", len(pixels))
     x = height
     y = width
+    totalpixels = height*width
+    processedpixels = 0
     
-    processedPixels = 0
+    ## Completion iterator and update interval to keep track of progress
+    itr = 1
+    interval = 10.0
     
     ## If the width is less than the height, we invert the indices to prevent an out of range error
     if width < height:
@@ -34,8 +38,13 @@ def process_image(photo, height, width, pixels):
     
     for i in range(x):
         for j in range(y):
-            #print("Processing", x * (i + 1) + j, "out of", x * y, "pixels.")
+            #print("Processing", processedpixels, "out of", x * y, "pixels.")
             rgb = pixels[x * i + j]
+            
+            ## Keeping track of the progress    
+            if (100 * processedpixels/totalpixels >= itr * interval):
+                print(100 * processedpixels/totalpixels, "% complete")  
+                itr += 1
             
             ## Creating an array of pixels: [1, r, g, b] and normalise it w.r.t. max RGB value of 255
             pixelarray = np.insert(np.asarray(rgb), 0, 1)
@@ -52,9 +61,9 @@ def process_image(photo, height, width, pixels):
             if score > 1:
                 put_pixel(photo, (i,j), rgb)
         
-        processedPixels += j+1
+            processedpixels += 1
         
-    return processedPixels
+    return processedpixels
  
 ## Runs code
 if __name__ == "__main__":
