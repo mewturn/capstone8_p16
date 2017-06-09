@@ -33,7 +33,7 @@ def calculateRGB(pixels):
     totalpixels = len(pixels)
     
     ## Completion iterator and update interval to keep track of progress
-    i = 1
+    itr = 1
     interval = 10.0
     
     print("Processing...")
@@ -60,9 +60,9 @@ def calculateRGB(pixels):
             other += 1
         
         ## Keeping track of the progress    
-        if (100 * processedpixels/totalpixels >= i * interval):
+        if (100 * processedpixels/totalpixels >= itr * interval):
             print(100 * processedpixels/totalpixels, "% complete")  
-            i += 1
+            itr += 1
             
         ''' Old Classification Method 
         if pixel[1] > pixel[0] and pixel[1] > pixel[2]:	# Green, if G-value > R-value AND G-value > B-value
