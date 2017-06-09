@@ -1,3 +1,9 @@
+## Milton Li 2017
+## Capstone 8 - Project 16: Bio-waste Disposal
+## Singapore University of Technology and Design
+
+## Analyses an image RGB values in order to train a model which recognizes "green" pixels
+
 from PIL import Image
 import sys
 import numpy as np
@@ -29,9 +35,9 @@ def calculateRGB(pixels):
     ## Each pixel is a 3-tuple -> pixel[0]: R-value, pixel[1]: G-value, pixel[2]: B-value
     for pixel in pixels:      
     
-        ## Current Classification Method -> w: [-65.377 -0.267 0.379 -0.388]
+        ## Current Classification Method -> w: [0.081832, -1.2328, 2.9351, -1.0643]
         pixelarray = np.insert(np.asarray(pixel), 0, 1)
-        #weights = np.asarray([-65.392, -0.287, 0.521, -0.481])
+        weights = np.asarray([0.081832, -1.2328, 2.9351, -1.0643])
         
         score = np.dot(pixelarray, weights)
         
