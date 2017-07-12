@@ -29,6 +29,7 @@ def process_image(photo, height, width, pixels, xiswidth=False):
     ## Completion iterator and update interval to keep track of progress
     itr = 1
     interval = 10.0
+    greenpixels = 0
     
     ## If the width is less than the height, we invert the indices to prevent an out of range error
     if width < height:
@@ -61,7 +62,8 @@ def process_image(photo, height, width, pixels, xiswidth=False):
                 ## If f(x) > 1, we are confident that it is classified correctly as "green"
                 if score > 1:
                     put_pixel(photo, (i,j), rgb)
-                    print("Placed pixel", photo, (i+1,j+1), rgb, (x,y))
+                    greenpixels += 1
+                    #print("Placed pixel", photo, (i+1,j+1), rgb, (x,y))
                 #else:
                     #print("Did not place pixel", (i+1,j+1))
                 processedpixels += 1
@@ -90,11 +92,12 @@ def process_image(photo, height, width, pixels, xiswidth=False):
                 ## If f(x) > 1, we are confident that it is classified correctly as "green"
                 if score > 1:
                     put_pixel(photo, (i,j), rgb)
+                    greenpixels += 1
                     #print("Placed pixel", photo, (i+1,j+1), rgb, (x,y))
                 #else:
                     #print("Did not place pixel", (i+1,j+1))
                 processedpixels += 1        
-    return processedpixels
+    return str(processedpixels) + " Green Pixels: " + str(greenpixels)
  
 ## Runs code
 if __name__ == "__main__":
