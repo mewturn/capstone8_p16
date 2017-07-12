@@ -7,11 +7,11 @@ camera = PiCamera()
 count = 1
 
 # Change this to change picture-taking interval (in seconds)
-t = 60
+t = 60 * 60 * 2
 
 while True:
 	# Output File Name (Month, Day, Hour, Minute both in 2 digits)
-	filename = str(time.strftime("%m%d%H%M"))+ "file" + str(count) + ".jpg"
+	filename = str(time.strftime("%m%d%H%M"))+ "file" + str(count) + ".jpg" 
 	
 	# Capture image and save to file
 	time.sleep(5)
