@@ -7,6 +7,7 @@
 from PIL import Image
 import sys
 import numpy as np
+import time
 
 def getPixelData(file):
     im = Image.open(file)
@@ -47,8 +48,8 @@ def calculateRGB(pixels):
         pixelarray = np.insert(np.asarray(pixel), 0, 1)
         pixelarray = np.divide(pixelarray, 255.0)
         
-        ## Current Classification Method -> w: [0.081832, -1.2328, 2.9351, -1.0643]
-        weights = np.asarray([0.081832, -1.2328, 2.9351, -1.0643])
+        ## Current Classification Method -> w: [0.081745, -1.34798, 2.93240, -0.95455]
+        weights = np.asarray([0.081745, -1.34798, 2.93240, -0.95455])
         
         ## Classifier: f(x) = w <dot> x
         score = np.dot(pixelarray, weights)
@@ -61,7 +62,7 @@ def calculateRGB(pixels):
         
         ## Keeping track of the progress    
         if (100 * processedpixels/totalpixels >= itr * interval):
-            print(100 * processedpixels/totalpixels, "% complete")  
+            print(100 * round(processedpixels/totalpixels,1), "% complete")  
             itr += 1
             
         ''' Old Classification Method 
@@ -87,4 +88,3 @@ if __name__ == "__main__":
     
     ## Data Tabulation
     ## green1.jpg -> Green: 16,622, Non-green: 1,067, Percentage of Green: 94.0%
-    
